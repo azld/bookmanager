@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookmanager.dao.user.UserMapper">
+
+	<resultMap id="BaseResultMap" type="com.bookmanager.model.User">
+		<id column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="username" property="userName" jdbcType="VARCHAR" />
+		<result column="password" property="userPassword" jdbcType="DECIMAL" />
+		<result column="type" property="userType" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="Full_Column_List">
+		user_id, username, password, type
+	</sql>
+	
+	<sql id="table_name">
+		user
+	</sql>
+
+	<insert id="insertUser" parameterType="com.bookmanager.model.User">
+		insert
+		into
+		<include refid="table_name" />
+		(username, password, type)
+		values(
+		#{userName, jdbcType = VARCHAR},
+		#{userPassword, jdbcType = VARCHAR},
+		#{userType, jdbcType = INTEGER}
+		);
+	</insert>
+
+	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Full_Column_List"></include>
+		from
+		<include refid="table_name" />
+		where user_id = #{ssuserId1};
+	</select>
+
+	<select id="seletcByUserID" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Full_Column_List"></include>
+		from
+		<include refid="table_name" />
+		where user_id = #{userId};
+	</select>
+
+	<select id="getAll" resultMap="BaseResultMap">
+		select
+		<!-- select user_id, username, password, type from user; -->
+		<include refid="Full_Column_List" />
+		from user
+		<include refid="table_name" /> 
+	</select>
+	<delete id="deleteById" parameterType="java.lang.Long">
+		delete
+		from
+		<include refid="table_name" />
+		where user_id = #{userId};
+	</delete>
+	<delete id="deleteByUserID" parameterType="java.lang.Long">
+		delete
+		from
+		<include refid="table_name" />
+		where user_id = #{user_id};
+	</delete>
+</mapper>
