@@ -30,11 +30,11 @@ public class UserTest {
 
 	@Autowired
 	public void setMuserService(UserService auserService) {
-		log.debug("222");
+		log.debug("222----------------------");
 		this.userService = auserService;
 	}
 
-//	@Test
+	@Test
 	public void user_add()
 	{
 		User auser = new User();
@@ -62,7 +62,7 @@ public class UserTest {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void user_delete()
 	{
 		List<User> users = userService.getAllUser();

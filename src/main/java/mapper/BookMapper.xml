@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bookmanager.dao.book.BookMapper">
+	<resultMap id="BaseResultMap" type="com.bookmanager.model.Book">
+		<id column="bookid" property="bookId" jdbcType="INTEGER" />
+		<result column="bookname" property="bookName" jdbcType="VARCHAR" />
+		<result column="writer" property="writer" jdbcType="VARCHAR" />
+		<result column="count" property="count" jdbcType="INTEGER" />
+		<result column="rest" property="rest" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<sql id="Full_Column_List">
+		bookid, bookname, writer, count, rest
+	</sql>
+	
+	<sql id="insert_Column_List">
+		(bookname, writer, count, rest)
+	</sql>
+	
+	<sql id="table_name">
+		books
+	</sql>
+	
+	<insert id="insertBook" parameterType="com.bookmanager.model.Book">
+		insert
+		into
+		<include refid="table_name" />
+		<include refid="insert_Column_List" />
+		values(
+		#{bookName, jdbcType = VARCHAR},
+		#{writer, jdbcType = VARCHAR},
+		#{count, jdbcType = INTEGER},
+		#{rest, jdbcType = INTEGER}
+		);
+	</insert>
+	
+	<select id="selectById" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Full_Column_List"></include>
+		from
+		<include refid="table_name" />
+		where bookid = #{bookId};
+	</select>
+
+	<select id="getAll" resultMap="BaseResultMap">
+		select
+		<include refid="Full_Column_List" />
+		from
+		<include refid="table_name" /> 
+	</select>
+	
+	<update id="checkout" parameterType="com.bookmanager.model.Book">
+		update 
+		<include refid="table_name" />
+		set
+		rest = #{rest, jdbcType = INTEGER}
+		where bookid = #{bookId, jdbcType = INTEGER}
+	</update>
+</mapper>

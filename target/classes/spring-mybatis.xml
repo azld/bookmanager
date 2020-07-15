@@ -26,10 +26,20 @@
 			value="classpath*:mapper/*.xml" />
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.bookmanager.dao.*" />
+		<property name="sqlSessionFactoryBeanName"
+			value="sqlSessionFactory" />
+	</bean>
+<!-- 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.bookmanager.dao.user" />
 		<property name="sqlSessionFactoryBeanName"
 			value="sqlSessionFactory" />
 	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.bookmanager.dao.book" />
+		<property name="sqlSessionFactoryBeanName"
+			value="sqlSessionFactory" />
+	</bean> -->
 	<!-- <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
 		<property name="dataSource" ref="dataSource" /> </bean> <tx:advice id="transactionAdvice" 
 		transaction-manager="transactionManager"> <tx:attributes> <tx:method name="add*" 

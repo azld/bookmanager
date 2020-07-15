@@ -34,7 +34,7 @@
 		<include refid="Full_Column_List"></include>
 		from
 		<include refid="table_name" />
-		where user_id = #{ssuserId1};
+		where user_id = #{userId};
 	</select>
 
 	<select id="seletcByUserID" resultMap="BaseResultMap"
@@ -50,7 +50,7 @@
 		select
 		<!-- select user_id, username, password, type from user; -->
 		<include refid="Full_Column_List" />
-		from user
+		from
 		<include refid="table_name" /> 
 	</select>
 	<delete id="deleteById" parameterType="java.lang.Long">
